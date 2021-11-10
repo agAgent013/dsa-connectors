@@ -17,7 +17,7 @@ abstract contract AugmentedFinanceConnector is Events, Helpers {
      * @dev Deposit ETH/ERC-20 Token.
      * @notice Deposit a token to Augmented Finance for lending / collaterization
      * @param token The address of the token to deposit (For ETH: 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE)
-     * @param amount The amount of the token to deposit (For max: `uint256(-1)`)
+     * @param amount The amount of the token to deposit (For max: `type(uint256).max`)
      * @param getId ID to retrieve amount
      * @param setId ID stores the amount of tokens deposited
      */
@@ -33,7 +33,7 @@ abstract contract AugmentedFinanceConnector is Events, Helpers {
     {
         uint256 tokenAmount = getUint(getId, amount);
         bool isEth = token == ethAddr;
-        bool isMax = tokenAmount == uint256(-1);
+        bool isMax = tokenAmount == type(uint256).max;
         address asset = isEth ? wethAddr : token;
 
         AugmentedFinanceInterface augmented = AugmentedFinanceInterface(
@@ -60,7 +60,7 @@ abstract contract AugmentedFinanceConnector is Events, Helpers {
      * @dev Withdraw ETH/ERC-20 Token.
      * @notice Withdraw deposited token from Augmented Finance
      * @param token The address of the token to withdraw.(For ETH: 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE)
-     * @param amount The amount of the token to withdraw. (For max: `uint256(-1)`)
+     * @param amount The amount of the token to withdraw. (For max: `type(uint256).max`)
      * @param getId ID to retrieve amount
      * @param setId ID stores the amount of tokens withdrawn
      */
@@ -138,7 +138,7 @@ abstract contract AugmentedFinanceConnector is Events, Helpers {
      * @dev Payback borrowed ETH/ERC-20 Token
      * @notice Payback debt owned
      * @param token The address of the token to payback (For ETH: 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE)
-     * @param amount The amount of the token to payback (For max: `uint256(-1)`)
+     * @param amount The amount of the token to payback (For max: `type(uint256).max`)
      * @param rateMode The type of debt paying back (For Stable: 1, Variable: 2)
      * @param getId ID to retrieve amount
      * @param setId ID stores the amount of tokens paid back
@@ -156,7 +156,7 @@ abstract contract AugmentedFinanceConnector is Events, Helpers {
     {
         uint256 tokenAmount = getUint(getId, amount);
         bool isEth = token == ethAddr;
-        bool isMax = tokenAmount == uint256(-1);
+        bool isMax = tokenAmount == type(uint256).max;
         address asset = isEth ? wethAddr : token;
 
         AugmentedFinanceInterface augmented = AugmentedFinanceInterface(
